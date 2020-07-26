@@ -3,6 +3,9 @@
 #######################
 library('shinydashboard')
 library('shiny')
+library('data.table')
+library('DT')
+library('plotly')
 
 ######################
 ### User Interface ###
@@ -16,25 +19,26 @@ ui <- dashboardPage(
     dashboardSidebar(
       width = 350,
       sidebarMenu(
-        menuItem("Galactose oxidase", tabName = "gaox", icon = icon("dashboard")),
-        selectInput("variable", "Variable:",
-                    c("Buffer" = "buf",
-                      "Buffer+Mediator" = "med",
-                      "Buffer+Substrate" = "sub",
-                      "Buffer+Mediator+Substrate" = "medsub")),
+        menuItem("Buffer", tabName = "buf", icon = icon("dashboard")),
+        menuItem("Buffer+Mediator", tabName = "med", icon = icon("dashboard")),
+        menuItem("Buffer+Substrate", tabName = "sub", icon = icon("dashboard")),
+        menuItem("Buffer+Mediator+Substrate", tabName = "all", icon = icon("dashboard")),
         menuItem("Plots", tabName = "plots", icon = icon("th"))
       )
     ),
     dashboardBody(
       tabItems(
         # First tab content
-        tabItem(tabName = "gaox",
+        tabItem(tabName = "buf",
                 fluidRow(
-                  box(plotOutput("plot1", height = 250)),
-                  
                   box(
+                    width = 6,
                     title = "Controls",
-                    sliderInput("slider", "Number of observations:", 1, 100, 50)
+                    fileInput("bufferFile", "Choose buffer file:", multiple = TRUE, accept = c(".ocw"))
+                  ),
+                  box(
+                    width = 6,
+                    plotlyOutput('plot1')
                   )
                 )
         ),
