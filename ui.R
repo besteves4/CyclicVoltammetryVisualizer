@@ -38,7 +38,7 @@ ui <- dashboardPage(
                   ),
                   box(
                     width = 6,
-                    plotlyOutput('plot1')
+                    plotlyOutput('initial_plot')
                   )
                 )
         ),
