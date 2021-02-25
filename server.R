@@ -208,4 +208,72 @@ server <- function(input, output) {
                           showline = TRUE))
   )
   
+  ###########
+  ### All ###
+  ###########
+  
+  # All Sample 1
+  all_x1 <- reactive({
+    fread(input$allFile$datapath[1], skip = 2)$V1
+  })
+  
+  all_y1 <- reactive({
+    fread(input$allFile$datapath[1], skip = 2)$V2
+  })
+  
+  # All Sample 2
+  all_x2 <- reactive({
+    fread(input$allFile$datapath[2], skip = 2)$V1
+  })
+  
+  all_y2 <- reactive({
+    fread(input$allFile$datapath[2], skip = 2)$V2
+  })
+  
+  #  All Sample 3
+  all_x3 <- reactive({
+    fread(input$allFile$datapath[3], skip = 2)$V1
+  })
+  
+  all_y3 <- reactive({
+    fread(input$allFile$datapath[3], skip = 2)$V2
+  })
+  
+  # All electrodes area
+  all_electrodes_area <- reactive({
+    as.numeric(input$all_electrodes_area)
+  })
+  
+  # All x axis
+  all_x_axis <- reactive({
+    input$all_x_axis
+  })
+  
+  # All y axis
+  all_y_axis <- reactive({
+    input$all_y_axis
+  })
+  
+  # All plot title
+  all_title <- reactive({
+    input$all_title
+  })
+  
+  output$all_plot <- renderPlotly(
+    plot_ly(x = all_x1(), y = all_y1() * 1000000 / all_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 1") %>%
+      add_trace(x = all_x2(), y = all_y2() * 1000000 / all_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 2") %>%
+      add_trace(x = all_x3(), y = all_y3() * 1000000 / all_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 3") %>%
+      layout(title = all_title(),
+             xaxis = list(title=all_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=all_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
 }

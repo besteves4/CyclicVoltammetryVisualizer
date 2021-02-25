@@ -85,6 +85,25 @@ ui <- dashboardPage(
                 )
         ),
         
+        # All tab content
+        tabItem(tabName = "all",
+                fluidRow(
+                  box(
+                    width = 6,
+                    title = "Controls",
+                    fileInput("allFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    textInput("all_electrodes_area", "Choose electrodes area:", 0.19),
+                    textInput("all_title", "Title:", ""),
+                    textInput("all_x_axis", "X axis:", ""),
+                    textInput("all_y_axis", "Y axis:", "")
+                  ),
+                  box(
+                    width = 6,
+                    plotlyOutput('all_plot')
+                  )
+                )
+        ),
+        
         # Plots tab content
         tabItem(tabName = "plots",
                 h2("Widgets tab content")
