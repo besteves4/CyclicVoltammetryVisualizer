@@ -4,6 +4,10 @@
 
 server <- function(input, output) {
 
+  ##############
+  ### Buffer ###
+  ##############
+  
   # Buffer Sample 1
   buffer_x1 <- reactive({
     fread(input$bufferFile$datapath[1], skip = 2)$V1
@@ -51,7 +55,7 @@ server <- function(input, output) {
     input$buffer_title
   })
   
-  output$initial_plot <- renderPlotly(
+  output$buffer_plot <- renderPlotly(
     plot_ly(x = buffer_x1(), y = buffer_y1() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 1") %>%
       add_trace(x = buffer_x2(), y = buffer_y2() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 2") %>%
       add_trace(x = buffer_x3(), y = buffer_y3() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 3") %>%
@@ -62,6 +66,74 @@ server <- function(input, output) {
                           tickcolor = toRGB("black"), 
                           showline = TRUE), 
              yaxis = list(title=buffer_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
+  ################
+  ### Mediator ###
+  ################
+  
+  # Mediator Sample 1
+  med_x1 <- reactive({
+    fread(input$medFile$datapath[1], skip = 2)$V1
+  })
+  
+  med_y1 <- reactive({
+    fread(input$medFile$datapath[1], skip = 2)$V2
+  })
+  
+  # Mediator Sample 2
+  med_x2 <- reactive({
+    fread(input$medFile$datapath[2], skip = 2)$V1
+  })
+  
+  med_y2 <- reactive({
+    fread(input$medFile$datapath[2], skip = 2)$V2
+  })
+  
+  #  Mediator Sample 3
+  med_x3 <- reactive({
+    fread(input$medFile$datapath[3], skip = 2)$V1
+  })
+  
+  med_y3 <- reactive({
+    fread(input$medFile$datapath[3], skip = 2)$V2
+  })
+  
+  # Mediator electrodes area
+  med_electrodes_area <- reactive({
+    as.numeric(input$med_electrodes_area)
+  })
+  
+  # Mediator x axis
+  med_x_axis <- reactive({
+    input$med_x_axis
+  })
+  
+  # Mediator y axis
+  med_y_axis <- reactive({
+    input$med_y_axis
+  })
+  
+  # Mediator plot title
+  med_title <- reactive({
+    input$med_title
+  })
+  
+  output$med_plot <- renderPlotly(
+    plot_ly(x = med_x1(), y = med_y1() * 1000000 / med_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 1") %>%
+      add_trace(x = med_x2(), y = med_y2() * 1000000 / med_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 2") %>%
+      add_trace(x = med_x3(), y = med_y3() * 1000000 / med_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 3") %>%
+      layout(title = med_title(),
+             xaxis = list(title=med_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=med_y_axis(), 
                           zerolinecolor = toRGB("white"), 
                           gridcolor = toRGB("white"), 
                           tickcolor = toRGB("black"), 

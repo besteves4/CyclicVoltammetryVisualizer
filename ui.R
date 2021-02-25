@@ -28,13 +28,13 @@ ui <- dashboardPage(
     ),
     dashboardBody(
       tabItems(
-        # First tab content
+        # Buffer tab content
         tabItem(tabName = "buf",
                 fluidRow(
                   box(
                     width = 6,
                     title = "Controls",
-                    fileInput("bufferFile", "Choose buffer file:", multiple = TRUE, accept = c(".ocw")),
+                    fileInput("bufferFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
                     textInput("buffer_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("buffer_title", "Title:", ""),
                     textInput("buffer_x_axis", "X axis:", ""),
@@ -42,12 +42,31 @@ ui <- dashboardPage(
                   ),
                   box(
                     width = 6,
-                    plotlyOutput('initial_plot')
+                    plotlyOutput('buffer_plot')
                   )
                 )
         ),
         
-        # Second tab content
+        # Mediator tab content
+        tabItem(tabName = "med",
+                fluidRow(
+                  box(
+                    width = 6,
+                    title = "Controls",
+                    fileInput("medFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    textInput("med_electrodes_area", "Choose electrodes area:", 0.19),
+                    textInput("med_title", "Title:", ""),
+                    textInput("med_x_axis", "X axis:", ""),
+                    textInput("med_y_axis", "Y axis:", "")
+                  ),
+                  box(
+                    width = 6,
+                    plotlyOutput('med_plot')
+                  )
+                )
+        ),
+        
+        # Plots tab content
         tabItem(tabName = "plots",
                 h2("Widgets tab content")
         )
