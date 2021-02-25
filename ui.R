@@ -66,6 +66,25 @@ ui <- dashboardPage(
                 )
         ),
         
+        # Substrate tab content
+        tabItem(tabName = "sub",
+                fluidRow(
+                  box(
+                    width = 6,
+                    title = "Controls",
+                    fileInput("subFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    textInput("sub_electrodes_area", "Choose electrodes area:", 0.19),
+                    textInput("sub_title", "Title:", ""),
+                    textInput("sub_x_axis", "X axis:", ""),
+                    textInput("sub_y_axis", "Y axis:", "")
+                  ),
+                  box(
+                    width = 6,
+                    plotlyOutput('sub_plot')
+                  )
+                )
+        ),
+        
         # Plots tab content
         tabItem(tabName = "plots",
                 h2("Widgets tab content")

@@ -140,4 +140,72 @@ server <- function(input, output) {
                           showline = TRUE))
   )
   
+  #################
+  ### Substrate ###
+  #################
+  
+  # Substrate Sample 1
+  sub_x1 <- reactive({
+    fread(input$subFile$datapath[1], skip = 2)$V1
+  })
+  
+  sub_y1 <- reactive({
+    fread(input$subFile$datapath[1], skip = 2)$V2
+  })
+  
+  # Substrate Sample 2
+  sub_x2 <- reactive({
+    fread(input$subFile$datapath[2], skip = 2)$V1
+  })
+  
+  sub_y2 <- reactive({
+    fread(input$subFile$datapath[2], skip = 2)$V2
+  })
+  
+  #  Substrate Sample 3
+  sub_x3 <- reactive({
+    fread(input$subFile$datapath[3], skip = 2)$V1
+  })
+  
+  sub_y3 <- reactive({
+    fread(input$subFile$datapath[3], skip = 2)$V2
+  })
+  
+  # Substrate electrodes area
+  sub_electrodes_area <- reactive({
+    as.numeric(input$sub_electrodes_area)
+  })
+  
+  # Substrate x axis
+  sub_x_axis <- reactive({
+    input$sub_x_axis
+  })
+  
+  # Substrate y axis
+  sub_y_axis <- reactive({
+    input$sub_y_axis
+  })
+  
+  # Substrate plot title
+  sub_title <- reactive({
+    input$sub_title
+  })
+  
+  output$sub_plot <- renderPlotly(
+    plot_ly(x = sub_x1(), y = sub_y1() * 1000000 / sub_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 1") %>%
+      add_trace(x = sub_x2(), y = sub_y2() * 1000000 / sub_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 2") %>%
+      add_trace(x = sub_x3(), y = sub_y3() * 1000000 / sub_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 3") %>%
+      layout(title = sub_title(),
+             xaxis = list(title=sub_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=sub_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
 }
