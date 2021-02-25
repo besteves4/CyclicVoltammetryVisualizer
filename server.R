@@ -50,7 +50,8 @@ server <- function(input, output) {
     plot_ly(x = buffer_x1(), y = buffer_y1() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 1") %>%
       add_trace(x = buffer_x2(), y = buffer_y2() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 2") %>%
       add_trace(x = buffer_x3(), y = buffer_y3() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 3") %>%
-      layout(xaxis = list(title=buffer_x_axis(), zerolinecolor = toRGB("white")), yaxis = list(title=buffer_y_axis(), zerolinecolor = toRGB("white")))
+      layout(xaxis = list(title=buffer_x_axis(), zerolinecolor = toRGB("white"), gridcolor = toRGB("white")), 
+             yaxis = list(title=buffer_y_axis(), zerolinecolor = toRGB("white"), gridcolor = toRGB("white")))
   )
   
 }
