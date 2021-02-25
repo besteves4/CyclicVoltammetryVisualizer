@@ -46,11 +46,17 @@ server <- function(input, output) {
     input$buffer_y_axis
   })
   
+  # Buffer plot title
+  buffer_title <- reactive({
+    input$buffer_title
+  })
+  
   output$initial_plot <- renderPlotly(
     plot_ly(x = buffer_x1(), y = buffer_y1() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 1") %>%
       add_trace(x = buffer_x2(), y = buffer_y2() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 2") %>%
       add_trace(x = buffer_x3(), y = buffer_y3() * 1000000 / buffer_electrodes_area(), type = 'scatter', mode = 'lines', name = "Sample 3") %>%
-      layout(xaxis = list(title=buffer_x_axis(), 
+      layout(title = buffer_title(),
+             xaxis = list(title=buffer_x_axis(), 
                           zerolinecolor = toRGB("white"), 
                           gridcolor = toRGB("white"), 
                           tickcolor = toRGB("black"), 

@@ -36,6 +36,7 @@ ui <- dashboardPage(
                     title = "Controls",
                     fileInput("bufferFile", "Choose buffer file:", multiple = TRUE, accept = c(".ocw")),
                     textInput("buffer_electrodes_area", "Choose electrodes area:", 0.19),
+                    textInput("buffer_title", "Title:", ""),
                     textInput("buffer_x_axis", "X axis:", ""),
                     textInput("buffer_y_axis", "Y axis:", "")
                   ),
