@@ -38,7 +38,11 @@ ui <- dashboardPage(
                     textInput("buffer_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("buffer_title", "Title:", ""),
                     textInput("buffer_x_axis", "X axis:", ""),
-                    textInput("buffer_y_axis", "Y axis:", "")
+                    textInput("buffer_y_axis", "Y axis:", ""),
+                    selectInput("buffer_select", "Select plot:",
+                                choices = c("Sample 1" = 1,
+                                            "Sample 2" = 2,
+                                            "Sample 3" = 3))
                   ),
                   box(
                     width = 6,
@@ -57,7 +61,11 @@ ui <- dashboardPage(
                     textInput("med_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("med_title", "Title:", ""),
                     textInput("med_x_axis", "X axis:", ""),
-                    textInput("med_y_axis", "Y axis:", "")
+                    textInput("med_y_axis", "Y axis:", ""),
+                    selectInput("med_select", "Select plot:",
+                                choices = c("Sample 1" = 1,
+                                            "Sample 2" = 2,
+                                            "Sample 3" = 3))
                   ),
                   box(
                     width = 6,
@@ -76,7 +84,11 @@ ui <- dashboardPage(
                     textInput("sub_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("sub_title", "Title:", ""),
                     textInput("sub_x_axis", "X axis:", ""),
-                    textInput("sub_y_axis", "Y axis:", "")
+                    textInput("sub_y_axis", "Y axis:", ""),
+                    selectInput("sub_select", "Select plot:",
+                                choices = c("Sample 1" = 1,
+                                            "Sample 2" = 2,
+                                            "Sample 3" = 3))
                   ),
                   box(
                     width = 6,
@@ -95,7 +107,11 @@ ui <- dashboardPage(
                     textInput("all_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("all_title", "Title:", ""),
                     textInput("all_x_axis", "X axis:", ""),
-                    textInput("all_y_axis", "Y axis:", "")
+                    textInput("all_y_axis", "Y axis:", ""),
+                    selectInput("all_select", "Select plot:",
+                                choices = c("Sample 1" = 1,
+                                            "Sample 2" = 2,
+                                            "Sample 3" = 3))
                   ),
                   box(
                     width = 6,
@@ -104,9 +120,33 @@ ui <- dashboardPage(
                 )
         ),
         
-        # Plots tab content
+        # Final plots tab content
         tabItem(tabName = "plots",
-                h2("Widgets tab content")
+                fluidRow(
+                  box(
+                    width = 6,
+                    title = "Buffer",
+                    plotlyOutput('final_buffer_plot'),
+                    textOutput("test")
+                  ),
+                  box(
+                    width = 6,
+                    title = "Buffer + Mediator",
+                    plotlyOutput('final_med_plot')
+                  )
+                ),
+                fluidRow(
+                  box(
+                    width = 6,
+                    title = "Buffer + Substrate",
+                    plotlyOutput('final_sub_plot')
+                  ),
+                  box(
+                    width = 6,
+                    title = "Buffer + Mediator + Substrate",
+                    plotlyOutput('final_all_plot')
+                  )
+                )
         )
       )
     )

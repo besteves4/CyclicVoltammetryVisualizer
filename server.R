@@ -276,4 +276,112 @@ server <- function(input, output) {
                           showline = TRUE))
   )
   
+  #########################
+  ### Final buffer plot ###
+  #########################
+  
+  # Get selected buffer sample data
+  selected_buffer_x <- reactive({
+    fread(input$bufferFile$datapath[as.numeric(input$buffer_select)], skip = 2)$V1
+  })
+  
+  selected_buffer_y <- reactive({
+    fread(input$bufferFile$datapath[as.numeric(input$buffer_select)], skip = 2)$V2
+  })
+  
+  output$final_buffer_plot <- renderPlotly(
+    plot_ly(x = selected_buffer_x(), 
+            y = selected_buffer_y() * 1000000 / buffer_electrodes_area(), 
+            type = 'scatter', mode = 'lines', name = "Sample") %>%
+      layout(title = buffer_title(),
+             xaxis = list(title=buffer_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=buffer_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
+  # Get selected mediator sample data
+  selected_med_x <- reactive({
+    fread(input$medFile$datapath[as.numeric(input$med_select)], skip = 2)$V1
+  })
+  
+  selected_med_y <- reactive({
+    fread(input$medFile$datapath[as.numeric(input$med_select)], skip = 2)$V2
+  })
+  
+  output$final_med_plot <- renderPlotly(
+    plot_ly(x = selected_med_x(), 
+            y = selected_med_y() * 1000000 / med_electrodes_area(), 
+            type = 'scatter', mode = 'lines', name = "Sample") %>%
+      layout(title = med_title(),
+             xaxis = list(title=med_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=med_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
+  # Get selected substrate sample data
+  selected_sub_x <- reactive({
+    fread(input$subFile$datapath[as.numeric(input$sub_select)], skip = 2)$V1
+  })
+  
+  selected_sub_y <- reactive({
+    fread(input$subFile$datapath[as.numeric(input$sub_select)], skip = 2)$V2
+  })
+  
+  output$final_sub_plot <- renderPlotly(
+    plot_ly(x = selected_sub_x(), 
+            y = selected_sub_y() * 1000000 / sub_electrodes_area(), 
+            type = 'scatter', mode = 'lines', name = "Sample") %>%
+      layout(title = sub_title(),
+             xaxis = list(title=sub_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=sub_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
+  # Get selected all sample data
+  selected_all_x <- reactive({
+    fread(input$allFile$datapath[as.numeric(input$all_select)], skip = 2)$V1
+  })
+  
+  selected_all_y <- reactive({
+    fread(input$allFile$datapath[as.numeric(input$all_select)], skip = 2)$V2
+  })
+  
+  output$final_all_plot <- renderPlotly(
+    plot_ly(x = selected_all_x(), 
+            y = selected_all_y() * 1000000 / all_electrodes_area(), 
+            type = 'scatter', mode = 'lines', name = "Sample") %>%
+      layout(title = all_title(),
+             xaxis = list(title=all_x_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE), 
+             yaxis = list(title=all_y_axis(), 
+                          zerolinecolor = toRGB("white"), 
+                          gridcolor = toRGB("white"), 
+                          tickcolor = toRGB("black"), 
+                          showline = TRUE))
+  )
+  
 }
