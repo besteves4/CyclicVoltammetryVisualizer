@@ -125,26 +125,19 @@ ui <- dashboardPage(
                 fluidRow(
                   box(
                     width = 6,
-                    title = "Buffer",
-                    plotlyOutput('final_buffer_plot'),
-                    textOutput("test")
+                    title = "Controls",
+                    textInput("final_plot_buffer", "Buffer sample title:", ""),
+                    textInput("final_plot_med", "Buffer+Mediator sample title:", ""),
+                    textInput("final_plot_sub", "Buffer+Substrate sample title:", ""),
+                    textInput("final_plot_all", "Buffer+mediator+sample sample title:", ""),
+                    textInput("final_plot_title", "Title:", ""),
+                    textInput("final_plot_x_axis", "X axis:", ""),
+                    textInput("final_plot_y_axis", "Y axis:", ""),
                   ),
                   box(
                     width = 6,
-                    title = "Buffer + Mediator",
-                    plotlyOutput('final_med_plot')
-                  )
-                ),
-                fluidRow(
-                  box(
-                    width = 6,
-                    title = "Buffer + Substrate",
-                    plotlyOutput('final_sub_plot')
-                  ),
-                  box(
-                    width = 6,
-                    title = "Buffer + Mediator + Substrate",
-                    plotlyOutput('final_all_plot')
+                    title = "Plot",
+                    plotlyOutput('final_plot')
                   )
                 )
         )
