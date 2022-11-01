@@ -34,7 +34,8 @@ ui <- dashboardPage(
                   box(
                     width = 6,
                     title = "Controls",
-                    fileInput("bufferFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    fileInput("bufferFile", "Choose files:", multiple = TRUE, accept = c(".ocw", ".oxw")),
+                    textOutput("bufferFile_out"),
                     textInput("buffer_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("buffer_title", "Title:", ""),
                     textInput("buffer_x_axis", "X axis:", ""),
@@ -57,7 +58,7 @@ ui <- dashboardPage(
                   box(
                     width = 6,
                     title = "Controls",
-                    fileInput("medFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    fileInput("medFile", "Choose files:", multiple = TRUE, accept = c(".ocw", ".oxw")),
                     textInput("med_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("med_title", "Title:", ""),
                     textInput("med_x_axis", "X axis:", ""),
@@ -80,7 +81,7 @@ ui <- dashboardPage(
                   box(
                     width = 6,
                     title = "Controls",
-                    fileInput("subFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    fileInput("subFile", "Choose files:", multiple = TRUE, accept = c(".ocw", ".oxw")),
                     textInput("sub_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("sub_title", "Title:", ""),
                     textInput("sub_x_axis", "X axis:", ""),
@@ -103,7 +104,7 @@ ui <- dashboardPage(
                   box(
                     width = 6,
                     title = "Controls",
-                    fileInput("allFile", "Choose files:", multiple = TRUE, accept = c(".ocw")),
+                    fileInput("allFile", "Choose files:", multiple = TRUE, accept = c(".ocw", ".oxw")),
                     textInput("all_electrodes_area", "Choose electrodes area:", 0.19),
                     textInput("all_title", "Title:", ""),
                     textInput("all_x_axis", "X axis:", ""),
